@@ -1,9 +1,27 @@
-module.exports.PublicarV1 = function(aplicacao, requisicao, resposta){
+module.exports.Publicar = function(aplicacao, requisicao, resposta){
     let postagem = requisicao.body;
     
     let conexao = aplicacao.config.configuracao.uriConexao;
     let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
     publicacaoDAO.NovaPublicacao(postagem, function(result){
+        resposta.send(result);
+    });
+}
+
+module.exports.ListarPublicacoes = function(aplicacao, requisicao, resposta){    
+    let conexao = aplicacao.config.configuracao.uriConexao;
+    let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
+    publicacaoDAO.ListarPublicacoes(function(result){
+        resposta.send(result);
+    });
+}
+
+module.exports.BuscarPublicacao = function(aplicacao, requisicao, resposta){    
+    let id = requisicao.params.id;
+    
+    let conexao = aplicacao.config.configuracao.uriConexao;
+    let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
+    publicacaoDAO.BuscarPublicacao(id, function(result){
         resposta.send(result);
     });
 }
