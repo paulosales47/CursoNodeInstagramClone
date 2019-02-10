@@ -2,7 +2,6 @@ module.exports= function(aplicacao){
     
     //POST
     aplicacao.post('/api/v1/publicacao', function(requisicao, resposta){
-        resposta.setHeader('Acess-Control-Allow-Origin', '*')
         aplicacao.app.controllers.publicacao.CriarPublicacao(aplicacao, requisicao, resposta);
     });
 
@@ -25,4 +24,12 @@ module.exports= function(aplicacao){
     aplicacao.delete('/api/v1/publicacao/:id', function(requisicao, resposta){
         aplicacao.app.controllers.publicacao.ExcluirPublicacao(aplicacao, requisicao, resposta);
     });
+
+    //EXIBIÇÃO DE IMAGENS
+    aplicacao.get('/api/v1/publicacao/imagens/:id', function(requisicao, resposta){
+        aplicacao.app.controllers.publicacao.BuscarImagem(aplicacao, requisicao, resposta);
+    })
+
+    //OPTIONS
+    //aplicacao.options('/api/v1/publicacao/', aplicacao.get('cors'));
 }

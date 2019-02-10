@@ -23,20 +23,14 @@
 					xhr.onload = function(){
 						if(xhr.status == 200){
 							let data = $.parseJSON(xhr.responseText);
-							let imagem;
-
+							
 							for(let i = 0; i < data.length; i++){
-								imagem = new Image();
-								imagem.src =  "data:image/jpg;base64,".concat(data[i].imagem);
-
-								console.log(imagem);
-
 								$("#container_timeline").append(
 									'<div class="publicacao">'+
 										'<span class="titulo">' + 
 											data[i].titulo
 										+'</span>'
-										+ '<img src="'+imagem.src+'"/ height="500" width="500">'
+										+ '<img src="http://localhost:3005/api/v1/publicacao/imagens/'+data[i].id_imagem+'" height="500" width="500">'
 									+'</div>'
 								);
 

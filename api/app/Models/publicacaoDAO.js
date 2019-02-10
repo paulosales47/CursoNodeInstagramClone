@@ -96,6 +96,41 @@ class PublicacaoDAO{
         .catch((erro) => callback(erro))
 
     }
+
+    SalvarImagem(imagem, callback){
+
+        MongoDB.connect(this._conexao, {useNewUrlParser: true})   
+        .then((client) => {
+            client.db()
+            .collection('imagens')
+            .insertOne(imagem, function(erro){
+                if(erro)
+                    callback(erro);
+                
+                callback(imagem);
+            });
+            client.close();
+        })
+        .catch((erro) => callback(erro));
+    }
+
+    BuscarImagem(id, callback){
+        MongoDB.connect(this._conexao, {useNewUrlParser: true})
+        .then((client) => {
+            client.db()
+            .collection('imagens')
+            .find(ObjectID(id))
+            .toArray(function(erro, result){
+                client.close();
+                if(erro)
+                    callback(erro);
+
+                callback(result);
+            })
+        })
+        .catch((erro) => callback(erro))
+
+    }
 }
 
 module.exports = function(){
