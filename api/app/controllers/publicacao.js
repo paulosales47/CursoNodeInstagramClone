@@ -12,7 +12,10 @@ module.exports.ListarPublicacoes = function(aplicacao, requisicao, resposta){
     let conexao = aplicacao.config.configuracao.uriConexao;
     let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
     publicacaoDAO.ListarPublicacoes(function(result){
-        resposta.send(result);
+        if(result.length > 0)
+            resposta.send(result);
+        else
+            resposta.status(404).send({mensagem: 'Nenhuma publicação cadastrada'});
     });
 }
 
@@ -22,7 +25,10 @@ module.exports.BuscarPublicacao = function(aplicacao, requisicao, resposta){
     let conexao = aplicacao.config.configuracao.uriConexao;
     let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
     publicacaoDAO.BuscarPublicacao(id, function(result){
-        resposta.send(result);
+        if(result.length > 0)
+            resposta.send(result);
+        else
+            resposta.status(404).send({mensagem: 'Nenhuma publicação localizada'});
     });
 }
 
@@ -33,7 +39,10 @@ module.exports.AtualizarPublicacao = function(aplicacao, requisicao, resposta){
     let conexao = aplicacao.config.configuracao.uriConexao;
     let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
     publicacaoDAO.AtualizarPublicacao(id, publicacao, function(result){
-        resposta.send(result);
+        if(result.result.nModified != 0)
+            resposta.send(result);
+        else
+            resposta.status(304).send();
     });
 }
 
