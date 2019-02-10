@@ -1,0 +1,32 @@
+{
+  "name": "instagramclone.site",
+  "version": "1.0.0",
+  "description": "Front-end do projeto Instagram Clone",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulosales47/CursoNodeInstagramClone.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongoDB",
+    "estudo"
+  ],
+  "author": "Paulo Henrique Sales Sampaio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paulosales47/CursoNodeInstagramClone/issues"
+  },
+  "homepage": "https://github.com/paulosales47/CursoNodeInstagramClone#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "consign": "^0.1.6",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.1"
+  }
+}
