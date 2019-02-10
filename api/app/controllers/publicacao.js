@@ -62,7 +62,6 @@ module.exports.AtualizarPublicacao = function(aplicacao, requisicao, resposta){
     let conexao = aplicacao.config.configuracao.uriConexao;
     let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
     publicacaoDAO.AtualizarPublicacao(id, publicacao, function(result){
-        console.log(result);
         if(result.result.nModified != 0)
             resposta.status(200).send(result);
         else
@@ -94,4 +93,19 @@ module.exports.BuscarImagem = function(aplicacao, requisicao, resposta){
             resposta.status(404).send({mensagem: 'Nenhuma imagem localizada'});
     });
 }
+
+module.exports.ExcluirComentario = function(aplicacao, requisicao, resposta){
+    let id = requisicao.params.id;
+    let conexao = aplicacao.config.configuracao.uriConexao;
+    let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
+
+    publicacaoDAO.ExcluirComentario(id, function(result){
+        if(result.result.nModified != 0)
+            resposta.status(200).send(result);
+        else
+            resposta.status(304).send();
+    })
+}
+
+
 

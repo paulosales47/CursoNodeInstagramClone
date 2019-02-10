@@ -134,6 +134,26 @@ class PublicacaoDAO{
         .catch((erro) => callback(erro))
 
     }
+
+    ExcluirComentario(id, callback){
+        MongoDB.connect(this._conexao, {useNewUrlParser: true})
+        .then((client) => {
+            client.db()
+            .collection('publicacoes')
+            .updateMany({}, {$pull: {
+                comentarios: {
+                    id_comentario: ObjectID(id)
+                }
+            }}, 
+            function(erro, result){
+                client.close();
+                if(erro)
+                    callback(erro);
+                callback(result)
+            })
+        })
+        .catch((erro) => callback(erro));
+    }
 }
 
 module.exports = function(){

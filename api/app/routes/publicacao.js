@@ -26,7 +26,12 @@ module.exports= function(aplicacao){
     });
 
     //EXIBIÇÃO DE IMAGENS
-    aplicacao.get('/api/v1/publicacao/imagens/:id', function(requisicao, resposta){
+    aplicacao.get('/api/v1/publicacao/imagem/:id', function(requisicao, resposta){
         aplicacao.app.controllers.publicacao.BuscarImagem(aplicacao, requisicao, resposta);
-    })
+    });
+
+    //REMOÇAO DE COMENTARIOS
+    aplicacao.delete('/api/v1/publicacao/comentario/:id', function(requisicao, resposta){
+        aplicacao.app.controllers.publicacao.ExcluirComentario(aplicacao, requisicao, resposta);
+    });
 }
