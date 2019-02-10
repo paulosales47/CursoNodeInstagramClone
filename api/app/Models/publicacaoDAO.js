@@ -70,9 +70,26 @@ class PublicacaoDAO{
             client.db()
             .collection('publicacoes')
             .updateOne({_id: ObjectID(id)}, {$set: publicacao}, function(erro, result){
+                client.close();
                 if(erro)
                     callback(erro);
 
+                callback(result);
+            })
+        })
+        .catch((erro) => callback(erro))
+
+    }
+
+    ExcluirPublicacao(id, callback){
+        MongoDB.connect(this._conexao, {useNewUrlParser: true})
+        .then((client) => {
+            client.db()
+            .collection('publicacoes')
+            .deleteOne(ObjectID(id), function(erro, result){
+                client.close();
+                if(erro)
+                    callback(erro);
                 callback(result);
             })
         })

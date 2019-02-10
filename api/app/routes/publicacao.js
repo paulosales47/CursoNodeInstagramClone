@@ -19,4 +19,9 @@ module.exports= function(aplicacao){
     aplicacao.put('/api/v1/publicacao/:id', function(requisicao, resposta){
         aplicacao.app.controllers.publicacao.AtualizarPublicacao(aplicacao, requisicao, resposta);
     });
+
+    //DELETE
+    aplicacao.delete('/api/v1/publicacao/:id', function(requisicao, resposta){
+        aplicacao.app.controllers.publicacao.ExcluirPublicacao(aplicacao, requisicao, resposta);
+    });
 }

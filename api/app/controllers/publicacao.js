@@ -36,3 +36,13 @@ module.exports.AtualizarPublicacao = function(aplicacao, requisicao, resposta){
         resposta.send(result);
     });
 }
+
+module.exports.ExcluirPublicacao = function(aplicacao, requisicao, resposta){    
+    let id = requisicao.params.id;
+    
+    let conexao = aplicacao.config.configuracao.uriConexao;
+    let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
+    publicacaoDAO.ExcluirPublicacao(id, function(result){
+        resposta.send(result);
+    });
+}
