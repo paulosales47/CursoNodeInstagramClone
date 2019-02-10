@@ -25,3 +25,14 @@ module.exports.BuscarPublicacao = function(aplicacao, requisicao, resposta){
         resposta.send(result);
     });
 }
+
+module.exports.AtualizarPublicacao = function(aplicacao, requisicao, resposta){    
+    let id = requisicao.params.id;
+    let publicacao = requisicao.body;
+    
+    let conexao = aplicacao.config.configuracao.uriConexao;
+    let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
+    publicacaoDAO.AtualizarPublicacao(id, publicacao, function(result){
+        resposta.send(result);
+    });
+}

@@ -15,4 +15,8 @@ module.exports= function(aplicacao){
         aplicacao.app.controllers.publicacao.BuscarPublicacao(aplicacao, requisicao, resposta);
     });
 
+    //PUT
+    aplicacao.put('/api/v1/publicacao/:id', function(requisicao, resposta){
+        aplicacao.app.controllers.publicacao.AtualizarPublicacao(aplicacao, requisicao, resposta);
+    });
 }

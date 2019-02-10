@@ -60,6 +60,25 @@ class PublicacaoDAO{
         .catch((erro) => callback(erro))
 
     }
+
+    AtualizarPublicacao(id, publicacao, callback){
+
+        publicacao.dataPublicacao = new Date();
+
+        MongoDB.connect(this._conexao, {useNewUrlParser: true})
+        .then((client) => {
+            client.db()
+            .collection('publicacoes')
+            .updateOne({_id: ObjectID(id)}, {$set: publicacao}, function(erro, result){
+                if(erro)
+                    callback(erro);
+
+                callback(result);
+            })
+        })
+        .catch((erro) => callback(erro))
+
+    }
 }
 
 module.exports = function(){
