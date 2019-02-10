@@ -2,7 +2,7 @@ module.exports= function(aplicacao){
     
     //POST
     aplicacao.post('/api/v1/publicacao', function(requisicao, resposta){
-        aplicacao.app.controllers.publicacao.Publicar(aplicacao, requisicao, resposta);
+        aplicacao.app.controllers.publicacao.CriarPublicacao(aplicacao, requisicao, resposta);
     });
 
     //GET

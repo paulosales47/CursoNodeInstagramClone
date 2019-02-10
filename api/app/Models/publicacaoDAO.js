@@ -6,7 +6,7 @@ class PublicacaoDAO{
         this._conexao = conexao
     }
 
-    NovaPublicacao(publicacao, callback){
+    CriarPublicacao(publicacao, callback){
 
         publicacao.dataPublicacao = new Date();
 

@@ -1,9 +1,9 @@
-module.exports.Publicar = function(aplicacao, requisicao, resposta){
+module.exports.CriarPublicacao = function(aplicacao, requisicao, resposta){
     let postagem = requisicao.body;
     
     let conexao = aplicacao.config.configuracao.uriConexao;
     let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
-    publicacaoDAO.NovaPublicacao(postagem, function(result){
+    publicacaoDAO.CriarPublicacao(postagem, function(result){
         resposta.send(result);
     });
 }
