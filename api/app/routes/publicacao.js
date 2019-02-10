@@ -3,8 +3,7 @@ module.exports= function(aplicacao){
     //POST
     aplicacao.post('/api/v1/publicacao', function(requisicao, resposta){
         resposta.setHeader('Acess-Control-Allow-Origin', '*')
-        console.log(requisicao.body);
-        //aplicacao.app.controllers.publicacao.CriarPublicacao(aplicacao, requisicao, resposta);
+        aplicacao.app.controllers.publicacao.CriarPublicacao(aplicacao, requisicao, resposta);
     });
 
     //GET

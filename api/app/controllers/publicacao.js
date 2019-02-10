@@ -1,9 +1,27 @@
+let fs = require('fs');
+
 module.exports.CriarPublicacao = function(aplicacao, requisicao, resposta){
+    let origem = requisicao.files.arquivo.path;
     let postagem = requisicao.body;
-    
+
+    let imagem = fs.readFileSync(origem, function(erro){
+        if(erro){
+            resposta.status(500).send('Ocorreu um erro ao processar ao processar a imagem');
+            return;
+        }
+    });
+
+    fs.unlinkSync(origem);
+
+    let postagemDados = {
+         titulo: postagem.titulo
+        ,imagem: imagem
+        ,nomeImagem: requisicao.files.arquivo.originalFilename
+    }
+
     let conexao = aplicacao.config.configuracao.uriConexao;
     let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
-    publicacaoDAO.CriarPublicacao(postagem, function(result){
+    publicacaoDAO.CriarPublicacao(postagemDados, function(result){
         resposta.send(result);
     });
 }
