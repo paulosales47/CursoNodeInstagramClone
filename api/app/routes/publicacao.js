@@ -29,7 +29,4 @@ module.exports= function(aplicacao){
     aplicacao.get('/api/v1/publicacao/imagens/:id', function(requisicao, resposta){
         aplicacao.app.controllers.publicacao.BuscarImagem(aplicacao, requisicao, resposta);
     })
-
-    //OPTIONS
-    //aplicacao.options('/api/v1/publicacao/', aplicacao.get('cors'));
 }
