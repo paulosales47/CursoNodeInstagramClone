@@ -28,6 +28,27 @@
 					return false;
 				});
 
+				$("#btn-publicar").click(function(){
+
+					let xhr = new XMLHttpRequest();
+					let formData = new FormData();
+					formData.append("arquivo", $("#arquivo").get(0).files[0]);
+					formData.append("titulo", $("#titulo").val());
+					
+					xhr.onreadystatechange = function(){
+						if(xhr.readyState == 4){
+							let resposta = xhr.responseText;
+							$("#mensagem").append(resposta);
+						}
+					}
+					
+					xhr.open("POST", "http://localhost:3005/api/v1/publicacao");
+					xhr.send(formData);
+
+
+
+				})
+
 			});
 		</script>
 
