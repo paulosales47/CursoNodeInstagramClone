@@ -63,13 +63,17 @@ class PublicacaoDAO{
 
     AtualizarPublicacao(id, publicacao, callback){
 
-        publicacao.dataPublicacao = new Date();
-
         MongoDB.connect(this._conexao, {useNewUrlParser: true})
         .then((client) => {
             client.db()
             .collection('publicacoes')
-            .updateOne({_id: ObjectID(id)}, {$set: publicacao}, function(erro, result){
+            .updateOne({_id: ObjectID(id)}, {$push: {
+                    comentarios: { 
+                        id_comentario: new ObjectID(),
+                        comentario: publicacao.comentario
+                    }
+                }},
+                function(erro, result){
                 client.close();
                 if(erro)
                     callback(erro);
@@ -78,7 +82,6 @@ class PublicacaoDAO{
             })
         })
         .catch((erro) => callback(erro))
-
     }
 
     ExcluirPublicacao(id, callback){

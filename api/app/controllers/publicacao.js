@@ -62,8 +62,9 @@ module.exports.AtualizarPublicacao = function(aplicacao, requisicao, resposta){
     let conexao = aplicacao.config.configuracao.uriConexao;
     let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
     publicacaoDAO.AtualizarPublicacao(id, publicacao, function(result){
+        console.log(result);
         if(result.result.nModified != 0)
-            resposta.send(result);
+            resposta.status(200).send(result);
         else
             resposta.status(304).send();
     });
@@ -86,7 +87,7 @@ module.exports.BuscarImagem = function(aplicacao, requisicao, resposta){
 
     publicacaoDAO.BuscarImagem(id, function(result){
         if(result.length > 0){
-            resposta.writeHead(200, {'content-type': 'image/png'});
+            resposta.writeHead(200, {'content-type': 'image/jpeg'});
             resposta.end(result[0].imagem.buffer);
         }
         else
