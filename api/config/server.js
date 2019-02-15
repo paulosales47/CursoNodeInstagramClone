@@ -3,7 +3,11 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let consign = require('consign');
 let connectMultipart = require('connect-multiparty');
+let https = require('https');
+let fs = require('fs');
+
 let app = express();
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -17,10 +21,16 @@ app.use(function(requisicao, resposta, next){
 });
 
 consign()
-    .include('./app/controllers')
-    .then('./app/routes')
-    .then('./app/models')
-    .then('./config/configuracao.js')
+    .include('./api/app/controllers')
+    .then('./api/app/routes')
+    .then('./api/app/models')
+    .then('./api/config/configuracao.js')
     .into(app);
 
-module.exports = app;
+let server = https.createServer({
+    key: fs.readFileSync('./api/config/server.key'),
+    cert: fs.readFileSync('./api/config/server.cert')
+}, app);
+
+module.exports.server = server;
+module.exports.app = app;
