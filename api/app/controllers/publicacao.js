@@ -1,8 +1,8 @@
 let fs = require('fs');
 
 module.exports.CriarPublicacao = function(aplicacao, requisicao, resposta){
-    let conexao = aplicacao.config.configuracao.uriConexao;
-    let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
+    let conexao = aplicacao.api.config.configuracao.uriConexao;
+    let publicacaoDAO = new aplicacao.api.app.models.publicacaoDAO(conexao);
     let origem = requisicao.files.arquivo.path;
     let postagem = requisicao.body;
     let imagem = fs.readFileSync(origem, function(erro){
@@ -32,8 +32,8 @@ module.exports.CriarPublicacao = function(aplicacao, requisicao, resposta){
 }
 
 module.exports.ListarPublicacoes = function(aplicacao, requisicao, resposta){    
-    let conexao = aplicacao.config.configuracao.uriConexao;
-    let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
+    let conexao = aplicacao.api.config.configuracao.uriConexao;
+    let publicacaoDAO = new aplicacao.api.app.models.publicacaoDAO(conexao);
     publicacaoDAO.ListarPublicacoes(function(result){
         if(result.length > 0)
             resposta.send(result);
@@ -45,8 +45,8 @@ module.exports.ListarPublicacoes = function(aplicacao, requisicao, resposta){
 module.exports.BuscarPublicacao = function(aplicacao, requisicao, resposta){    
     let id = requisicao.params.id;
     
-    let conexao = aplicacao.config.configuracao.uriConexao;
-    let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
+    let conexao = aplicacao.api.config.configuracao.uriConexao;
+    let publicacaoDAO = new aplicacao.api.app.models.publicacaoDAO(conexao);
     publicacaoDAO.BuscarPublicacao(id, function(result){
         if(result.length > 0)
             resposta.send(result);
@@ -59,8 +59,8 @@ module.exports.AtualizarPublicacao = function(aplicacao, requisicao, resposta){
     let id = requisicao.params.id;
     let publicacao = requisicao.body;
     
-    let conexao = aplicacao.config.configuracao.uriConexao;
-    let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
+    let conexao = aplicacao.api.config.configuracao.uriConexao;
+    let publicacaoDAO = new aplicacao.api.app.models.publicacaoDAO(conexao);
     publicacaoDAO.AtualizarPublicacao(id, publicacao, function(result){
         if(result.result.nModified != 0)
             resposta.status(200).send(result);
@@ -72,8 +72,8 @@ module.exports.AtualizarPublicacao = function(aplicacao, requisicao, resposta){
 module.exports.ExcluirPublicacao = function(aplicacao, requisicao, resposta){    
     let id = requisicao.params.id;
     
-    let conexao = aplicacao.config.configuracao.uriConexao;
-    let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
+    let conexao = aplicacao.api.config.configuracao.uriConexao;
+    let publicacaoDAO = new aplicacao.api.app.models.publicacaoDAO(conexao);
     publicacaoDAO.ExcluirPublicacao(id, function(result){
         resposta.send(result);
     });
@@ -81,8 +81,8 @@ module.exports.ExcluirPublicacao = function(aplicacao, requisicao, resposta){
 
 module.exports.BuscarImagem = function(aplicacao, requisicao, resposta){    
     let id = requisicao.params.id;
-    let conexao = aplicacao.config.configuracao.uriConexao;
-    let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
+    let conexao = aplicacao.api.config.configuracao.uriConexao;
+    let publicacaoDAO = new aplicacao.api.app.models.publicacaoDAO(conexao);
 
     publicacaoDAO.BuscarImagem(id, function(result){
         if(result.length > 0){
@@ -96,8 +96,8 @@ module.exports.BuscarImagem = function(aplicacao, requisicao, resposta){
 
 module.exports.ExcluirComentario = function(aplicacao, requisicao, resposta){
     let id = requisicao.params.id;
-    let conexao = aplicacao.config.configuracao.uriConexao;
-    let publicacaoDAO = new aplicacao.app.models.publicacaoDAO(conexao);
+    let conexao = aplicacao.api.config.configuracao.uriConexao;
+    let publicacaoDAO = new aplicacao.api.app.models.publicacaoDAO(conexao);
 
     publicacaoDAO.ExcluirComentario(id, function(result){
         if(result.result.nModified != 0)
