@@ -19,7 +19,7 @@
 
 				function CarregaPostagens(){
 					let xhr = new XMLHttpRequest();
-					xhr.open("GET", "http://localhost:3005/api/v1/publicacao/");
+					xhr.open("GET", "https://localhost:3005/api/v1/publicacao/");
 					xhr.onload = function(){
 						if(xhr.status == 200){
 							let data = $.parseJSON(xhr.responseText);
@@ -30,7 +30,7 @@
 										'<span class="titulo">' + 
 											data[i].titulo
 										+'</span>'
-										+ '<img src="http://localhost:3005/api/v1/publicacao/imagem/'+data[i].id_imagem+'" height="500" width="500">'
+										+ '<img src="https://localhost:3005/api/v1/publicacao/imagem/'+data[i].id_imagem+'" height="500" width="500">'
 										+ '<div class="comentarios" id="comentarios_'+data[i]._id+'"> </div>'
 										+  '<div class="comentar">'
 											+ '<input type="text" class="form-control input_comentario" id='+data[i]._id+'>'
@@ -58,7 +58,7 @@
 								let comentario = $('#'.concat(id)).val();
 								
 								let xhr = new XMLHttpRequest();
-								xhr.open("PUT", "http://localhost:3005/api/v1/publicacao/".concat(id));
+								xhr.open("PUT", "https://localhost:3005/api/v1/publicacao/".concat(id));
 								xhr.setRequestHeader('content-type', 'application/json');
 
 								xhr.onload = function(){
@@ -73,7 +73,7 @@
 							$(".btn_remover_postagem").click(function(){
 								id_comentario = this.value;
 								let xhr = new XMLHttpRequest();
-								xhr.open("DELETE", "http://localhost:3005/api/v1/publicacao/comentario/".concat(id_comentario));
+								xhr.open("DELETE", "https://localhost:3005/api/v1/publicacao/comentario/".concat(id_comentario));
 								xhr.onload = function(){
 									if(xhr.status == 200){
 										window.location.href = '/home';
@@ -114,7 +114,7 @@
 						}
 					}
 					
-					xhr.open("POST", "http://localhost:3005/api/v1/publicacao");
+					xhr.open("POST", "https://localhost:3005/api/v1/publicacao");
 					xhr.send(formData);
 				})
 
